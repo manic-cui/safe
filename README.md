@@ -139,6 +139,21 @@ bash scripts/train.sh
 
 This script enables training with 4 GPUs, you can specify the number of GPUs by setting `GPU_NUM`.
 
+### 📈 Tracking with Weights & Biases
+
+The training script now streams losses, learning rates, and validation metrics to [Weights & Biases](https://wandb.ai/). Logging is enabled by default (set `USE_WANDB=false` to disable) and can be customized through environment variables:
+
+```bash
+export WANDB_API_KEY=<your_api_key>
+export WANDB_PROJECT=SAFE          # optional: change project/name/group
+export WANDB_GROUP=SAFE
+export WANDB_TAGS="train,SAFE"
+export WANDB_MODE=online           # or offline/disabled
+bash scripts/train.sh
+```
+
+If you prefer manual control, you can pass the CLI flags directly, e.g. `--use_wandb True --wandb_project SAFE --wandb_run_name my_run`. Only the main process logs to WandB, so distributed training behaves as expected.
+
 ## 🧊 Inference
 
 ```

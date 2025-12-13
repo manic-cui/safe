@@ -14,13 +14,20 @@ DISTRIBUTED_ARGS="
 "
 
 train_datasets=(
-    "data/datasets/train_ForenSynths/train" \
+    "/data/mannicui/aigi-detection/CNNDetection/train" \
 )
 eval_datasets=(
-    "data/datasets/train_ForenSynths/val" \
+    "/data/mannicui/aigi-detection/CNNDetection/val" \
 )
 
 MODEL="SAFE"
+
+USE_WANDB=${USE_WANDB:-true}
+WANDB_PROJECT=${WANDB_PROJECT:-SAFE}
+WANDB_ENTITY=${WANDB_ENTITY:-}
+WANDB_GROUP=${WANDB_GROUP:-SAFE}
+WANDB_MODE=${WANDB_MODE:-online}
+WANDB_TAGS=${WANDB_TAGS:-train,$MODEL}
 
 for train_dataset in "${train_datasets[@]}" 
 do
@@ -30,6 +37,11 @@ do
         current_time=$(date +"%Y%m%d_%H%M%S")
         OUTPUT_PATH="results/$MODEL/$current_time"
         mkdir -p $OUTPUT_PATH
+
+        train_name=$(basename "$train_dataset")
+        eval_name=$(basename "$eval_dataset")
+        run_name="${MODEL}_${current_time}_${train_name}_${eval_name}"
+        wandb_notes="train:${train_name} eval:${eval_name}"
 
         python -m torch.distributed.launch $DISTRIBUTED_ARGS main_finetune.py \
             --input_size 256 \
@@ -45,6 +57,14 @@ do
             --epochs 20 \
             --num_workers 16 \
             --output_dir $OUTPUT_PATH \
+            --use_wandb $USE_WANDB \
+            --wandb_project "$WANDB_PROJECT" \
+            --wandb_entity "$WANDB_ENTITY" \
+            --wandb_group "$WANDB_GROUP" \
+            --wandb_run_name "$run_name" \
+            --wandb_notes "$wandb_notes" \
+            --wandb_tags "$WANDB_TAGS" \
+            --wandb_mode "$WANDB_MODE" \
         2>&1 | tee -a $OUTPUT_PATH/log_train.txt
 
     done

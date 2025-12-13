@@ -1,0 +1,242 @@
+(safe) mannicui@hustvl-2030:~/SAFE$ bash scripts/train.sh
+/data/mannicui/miniconda3/envs/safe/lib/python3.9/site-packages/torch/distributed/launch.py:183: FutureWarning: The module torch.distributed.launch is deprecated
+and will be removed in future. Use torchrun.
+Note that --use-env is set by default in torchrun.
+If your script expects `--local-rank` argument to be set, please
+change it to read from `os.environ['LOCAL_RANK']` instead. See 
+https://pytorch.org/docs/stable/distributed.html#launch-utility for 
+further instructions
+
+  warnings.warn(
+[2025-12-11 22:08:00,388] torch.distributed.run: [WARNING] 
+[2025-12-11 22:08:00,388] torch.distributed.run: [WARNING] *****************************************
+[2025-12-11 22:08:00,388] torch.distributed.run: [WARNING] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+[2025-12-11 22:08:00,388] torch.distributed.run: [WARNING] *****************************************
+| distributed init (rank 0): env://, gpu 0
+| distributed init (rank 3): env://, gpu 3
+| distributed init (rank 1): env://, gpu 1
+| distributed init (rank 2): env://, gpu 2
+Namespace(jpeg_factor=None, blur_sigma=None, mask_ratio=None, mask_patch_size=None, transform_mode='crop', batch_size=32, epochs=20, update_freq=1, model='SAFE', input_size=256, layer_decay_type='single', model_ema=False, model_ema_decay=0.9999, model_ema_force_cpu=False, model_ema_eval=False, clip_grad=None, weight_decay=0.01, lr=None, blr=0.01, layer_decay=1.0, min_lr=1e-06, warmup_epochs=1, warmup_steps=-1, opt='adamw', opt_eps=1e-08, opt_betas=None, momentum=0.9, weight_decay_end=None, smoothing=0.1, mixup=0.0, cutmix=0.0, cutmix_minmax=None, mixup_prob=1.0, mixup_switch_prob=0.5, mixup_mode='batch', pretrained=True, global_pool=True, head_init_scale=0.001, model_key='model|module', model_prefix='', num_train=10000000000, data_path='/data/mannicui/data/dataset/WildRF/train', nb_classes=2, output_dir='results/SAFE/20251211_220758', log_dir=None, device='cuda', seed=None, resume='', eval_data_path='/data/mannicui/data/dataset/WildRF/val', imagenet_default_mean_and_std=True, data_set='IMNET', auto_resume=True, save_ckpt=True, save_ckpt_freq=1, save_ckpt_num=100, start_epoch=0, eval=False, dist_eval=True, disable_eval=False, num_workers=16, pin_mem=True, crop_pct=None, world_size=4, local_rank=0, dist_on_itp=False, dist_url='env://', use_amp=False, rank=0, gpu=0, distributed=True, dist_backend='nccl')
+Sampler_train = <torch.utils.data.distributed.DistributedSampler object at 0x7f2da390ec70>
+Warning: Enabling distributed evaluation with an eval dataset not divisible by process number. This will slightly alter validation results as extra duplicate entries are added to achieve equal num of samples per-process.
+Number of params: 1.44M
+Base lr: 1.00e-02
+Actual lr: 5.00e-03
+Accumulate grad iterations: 1
+Effective batch size: 128
+criterion = LabelSmoothingCrossEntropy()
+Auto resume checkpoint: 
+Start training for 20 epochs
+/data/mannicui/miniconda3/envs/safe/lib/python3.9/site-packages/pytorch_wavelets/dtcwt/coeffs.py:7: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  from pkg_resources import resource_stream
+/data/mannicui/miniconda3/envs/safe/lib/python3.9/site-packages/pytorch_wavelets/dtcwt/coeffs.py:7: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  from pkg_resources import resource_stream
+/data/mannicui/miniconda3/envs/safe/lib/python3.9/site-packages/pytorch_wavelets/dtcwt/coeffs.py:7: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  from pkg_resources import resource_stream
+/data/mannicui/miniconda3/envs/safe/lib/python3.9/site-packages/pytorch_wavelets/dtcwt/coeffs.py:7: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  from pkg_resources import resource_stream
+[rank1]:[W reducer.cpp:1360] Warning: find_unused_parameters=True was specified in DDP constructor, but did not find any unused parameters in the forward pass. This flag results in an extra traversal of the autograd graph every iteration,  which can adversely affect performance. If your model indeed never has any unused parameters in the forward pass, consider turning this flag off. Note that this warning may be a false positive if your model has flow control causing later iterations to have unused parameters. (function operator())
+[rank3]:[W reducer.cpp:1360] Warning: find_unused_parameters=True was specified in DDP constructor, but did not find any unused parameters in the forward pass. This flag results in an extra traversal of the autograd graph every iteration,  which can adversely affect performance. If your model indeed never has any unused parameters in the forward pass, consider turning this flag off. Note that this warning may be a false positive if your model has flow control causing later iterations to have unused parameters. (function operator())
+[rank0]:[W reducer.cpp:1360] Warning: find_unused_parameters=True was specified in DDP constructor, but did not find any unused parameters in the forward pass. This flag results in an extra traversal of the autograd graph every iteration,  which can adversely affect performance. If your model indeed never has any unused parameters in the forward pass, consider turning this flag off. Note that this warning may be a false positive if your model has flow control causing later iterations to have unused parameters. (function operator())
+[rank2]:[W reducer.cpp:1360] Warning: find_unused_parameters=True was specified in DDP constructor, but did not find any unused parameters in the forward pass. This flag results in an extra traversal of the autograd graph every iteration,  which can adversely affect performance. If your model indeed never has any unused parameters in the forward pass, consider turning this flag off. Note that this warning may be a false positive if your model has flow control causing later iterations to have unused parameters. (function operator())
+Epoch: [0]  [ 0/21]  eta: 0:02:45  lr: 0.000000  loss: 0.8924 (0.8924)  class_acc: 0.4375 (0.4375)  min_lr: 0.0000 (0.0000)  weight_decay: 0.0100 (0.0100)  time: 7.8581
+Epoch: [0]  [20/21]  eta: 0:00:00  lr: 0.004762  loss: 0.7377 (0.7741)  class_acc: 0.5312 (0.5149)  min_lr: 0.0024 (0.0024)  weight_decay: 0.0100 (0.0100)  time: 0.1161
+Epoch: [0] Total time: 0:00:10 (0.4893 s / it)
+Averaged stats: lr: 0.004762  loss: 0.7377 (0.7407)  class_acc: 0.5312 (0.5379)  min_lr: 0.0024 (0.0024)  weight_decay: 0.0100 (0.0100)
+Test:  [0/4]  eta: 0:00:09  loss: 0.2859 (0.2859)  acc1: 1.0000 (1.0000)  time: 2.2862
+Test:  [3/4]  eta: 0:00:00  loss: 0.7843 (0.9682)  acc1: 0.0000 (0.5000)  time: 0.5989
+Test: Total time: 0:00:02 (0.6100 s / it)
+* Acc@1 50.25% loss 0.9358
+Accuracy of the model on the 398 test images: 50.25%
+Max accuracy: 50.25%
+Epoch: [1]  [ 0/21]  eta: 0:02:13  lr: 0.005000  loss: 0.6049 (0.6049)  class_acc: 0.7500 (0.7500)  min_lr: 0.0050 (0.0050)  weight_decay: 0.0100 (0.0100)  time: 6.3385
+Epoch: [1]  [20/21]  eta: 0:00:00  lr: 0.004969  loss: 0.6588 (0.6560)  class_acc: 0.5938 (0.6057)  min_lr: 0.0050 (0.0050)  weight_decay: 0.0100 (0.0100)  time: 0.1467
+Epoch: [1] Total time: 0:00:09 (0.4486 s / it)
+Averaged stats: lr: 0.004969  loss: 0.6588 (0.6576)  class_acc: 0.5938 (0.6179)  min_lr: 0.0050 (0.0050)  weight_decay: 0.0100 (0.0100)
+Test:  [0/4]  eta: 0:00:09  loss: 1.1656 (1.1656)  acc1: 0.0000 (0.0000)  time: 2.2917
+Test:  [3/4]  eta: 0:00:00  loss: 0.4210 (0.6854)  acc1: 0.4375 (0.5000)  time: 0.5838
+Test: Total time: 0:00:02 (0.6037 s / it)
+* Acc@1 49.75% loss 0.7043
+Accuracy of the model on the 398 test images: 49.75%
+Max accuracy: 50.25%
+Epoch: [2]  [ 0/21]  eta: 0:02:18  lr: 0.004966  loss: 0.6641 (0.6641)  class_acc: 0.6250 (0.6250)  min_lr: 0.0050 (0.0050)  weight_decay: 0.0100 (0.0100)  time: 6.5763
+Epoch: [2]  [20/21]  eta: 0:00:00  lr: 0.004871  loss: 0.6350 (0.6400)  class_acc: 0.6875 (0.6548)  min_lr: 0.0049 (0.0049)  weight_decay: 0.0100 (0.0100)  time: 0.1441
+Epoch: [2] Total time: 0:00:09 (0.4573 s / it)
+Averaged stats: lr: 0.004871  loss: 0.6350 (0.6416)  class_acc: 0.6875 (0.6514)  min_lr: 0.0049 (0.0049)  weight_decay: 0.0100 (0.0100)
+Test:  [0/4]  eta: 0:00:09  loss: 0.3512 (0.3512)  acc1: 1.0000 (1.0000)  time: 2.3947
+Test:  [3/4]  eta: 0:00:00  loss: 0.7396 (0.9006)  acc1: 0.0000 (0.5100)  time: 0.6094
+Test: Total time: 0:00:02 (0.6214 s / it)
+* Acc@1 50.50% loss 0.8688
+Accuracy of the model on the 398 test images: 50.50%
+Max accuracy: 50.50%
+Epoch: [3]  [ 0/21]  eta: 0:02:11  lr: 0.004865  loss: 0.6610 (0.6610)  class_acc: 0.5312 (0.5312)  min_lr: 0.0049 (0.0049)  weight_decay: 0.0100 (0.0100)  time: 6.2765
+Epoch: [3]  [20/21]  eta: 0:00:00  lr: 0.004708  loss: 0.6085 (0.6229)  class_acc: 0.7188 (0.6875)  min_lr: 0.0048 (0.0048)  weight_decay: 0.0100 (0.0100)  time: 0.1619
+Epoch: [3] Total time: 0:00:09 (0.4596 s / it)
+Averaged stats: lr: 0.004708  loss: 0.6085 (0.6321)  class_acc: 0.7188 (0.6629)  min_lr: 0.0048 (0.0048)  weight_decay: 0.0100 (0.0100)
+Test:  [0/4]  eta: 0:00:09  loss: 0.3859 (0.3859)  acc1: 1.0000 (1.0000)  time: 2.3552
+Test:  [3/4]  eta: 0:00:00  loss: 0.7068 (0.8724)  acc1: 0.0625 (0.5300)  time: 0.5997
+Test: Total time: 0:00:02 (0.6125 s / it)
+* Acc@1 52.50% loss 0.8566
+Accuracy of the model on the 398 test images: 52.50%
+Max accuracy: 52.50%
+Epoch: [4]  [ 0/21]  eta: 0:02:21  lr: 0.004699  loss: 0.6025 (0.6025)  class_acc: 0.6250 (0.6250)  min_lr: 0.0047 (0.0047)  weight_decay: 0.0100 (0.0100)  time: 6.7617
+Epoch: [4]  [20/21]  eta: 0:00:00  lr: 0.004485  loss: 0.6058 (0.6227)  class_acc: 0.6562 (0.6726)  min_lr: 0.0046 (0.0046)  weight_decay: 0.0100 (0.0100)  time: 0.1290
+Epoch: [4] Total time: 0:00:09 (0.4504 s / it)
+Averaged stats: lr: 0.004485  loss: 0.6058 (0.6262)  class_acc: 0.6562 (0.6704)  min_lr: 0.0046 (0.0046)  weight_decay: 0.0100 (0.0100)
+Test:  [0/4]  eta: 0:00:09  loss: 0.2463 (0.2463)  acc1: 0.9375 (0.9375)  time: 2.3970
+Test:  [3/4]  eta: 0:00:00  loss: 0.5704 (1.0253)  acc1: 0.3438 (0.6400)  time: 0.6100
+Test: Total time: 0:00:02 (0.6230 s / it)
+* Acc@1 62.00% loss 0.8189
+Accuracy of the model on the 398 test images: 62.00%
+Max accuracy: 62.00%
+Epoch: [5]  [ 0/21]  eta: 0:02:03  lr: 0.004473  loss: 0.5852 (0.5852)  class_acc: 0.8125 (0.8125)  min_lr: 0.0045 (0.0045)  weight_decay: 0.0100 (0.0100)  time: 5.8623
+Epoch: [5]  [20/21]  eta: 0:00:00  lr: 0.004208  loss: 0.6022 (0.6292)  class_acc: 0.6562 (0.6875)  min_lr: 0.0043 (0.0043)  weight_decay: 0.0100 (0.0100)  time: 0.1760
+Epoch: [5] Total time: 0:00:09 (0.4533 s / it)
+Averaged stats: lr: 0.004208  loss: 0.6022 (0.6388)  class_acc: 0.6562 (0.6603)  min_lr: 0.0043 (0.0043)  weight_decay: 0.0100 (0.0100)
+Test:  [0/4]  eta: 0:00:09  loss: 0.2425 (0.2425)  acc1: 0.9375 (0.9375)  time: 2.2999
+Test:  [3/4]  eta: 0:00:00  loss: 0.5147 (0.9920)  acc1: 0.2500 (0.6100)  time: 0.5860
+Test: Total time: 0:00:02 (0.6022 s / it)
+* Acc@1 60.25% loss 0.8018
+Accuracy of the model on the 398 test images: 60.25%
+Max accuracy: 62.00%
+Epoch: [6]  [ 0/21]  eta: 0:01:46  lr: 0.004193  loss: 0.6020 (0.6020)  class_acc: 0.7188 (0.7188)  min_lr: 0.0042 (0.0042)  weight_decay: 0.0100 (0.0100)  time: 5.0487
+Epoch: [6]  [20/21]  eta: 0:00:00  lr: 0.003884  loss: 0.6191 (0.6185)  class_acc: 0.6562 (0.6801)  min_lr: 0.0040 (0.0040)  weight_decay: 0.0100 (0.0100)  time: 0.2449
+Epoch: [6] Total time: 0:00:10 (0.4807 s / it)
+Averaged stats: lr: 0.003884  loss: 0.6191 (0.6245)  class_acc: 0.6562 (0.6674)  min_lr: 0.0040 (0.0040)  weight_decay: 0.0100 (0.0100)
+Test:  [0/4]  eta: 0:00:09  loss: 0.3948 (0.3948)  acc1: 0.9062 (0.9062)  time: 2.4090
+Test:  [3/4]  eta: 0:00:00  loss: 0.5030 (0.7440)  acc1: 0.3438 (0.6500)  time: 0.6290
+Test: Total time: 0:00:02 (0.6418 s / it)
+* Acc@1 66.25% loss 0.6369
+Accuracy of the model on the 398 test images: 66.25%
+Max accuracy: 66.25%
+Epoch: [7]  [ 0/21]  eta: 0:02:02  lr: 0.003868  loss: 0.7205 (0.7205)  class_acc: 0.5625 (0.5625)  min_lr: 0.0039 (0.0039)  weight_decay: 0.0100 (0.0100)  time: 5.8331
+Epoch: [7]  [20/21]  eta: 0:00:00  lr: 0.003523  loss: 0.5994 (0.6143)  class_acc: 0.6875 (0.6815)  min_lr: 0.0037 (0.0037)  weight_decay: 0.0100 (0.0100)  time: 0.1885
+Epoch: [7] Total time: 0:00:09 (0.4638 s / it)
+Averaged stats: lr: 0.003523  loss: 0.5994 (0.6128)  class_acc: 0.6875 (0.6912)  min_lr: 0.0037 (0.0037)  weight_decay: 0.0100 (0.0100)
+Test:  [0/4]  eta: 0:00:09  loss: 0.1993 (0.1993)  acc1: 0.9688 (0.9688)  time: 2.4619
+Test:  [3/4]  eta: 0:00:00  loss: 0.5117 (0.9958)  acc1: 0.3125 (0.6600)  time: 0.6262
+Test: Total time: 0:00:02 (0.6472 s / it)
+* Acc@1 65.00% loss 0.7237
+Accuracy of the model on the 398 test images: 65.00%
+Max accuracy: 66.25%
+Epoch: [8]  [ 0/21]  eta: 0:01:52  lr: 0.003505  loss: 0.6715 (0.6715)  class_acc: 0.6562 (0.6562)  min_lr: 0.0035 (0.0035)  weight_decay: 0.0100 (0.0100)  time: 5.3570
+Epoch: [8]  [20/21]  eta: 0:00:00  lr: 0.003133  loss: 0.6106 (0.6250)  class_acc: 0.6562 (0.6771)  min_lr: 0.0033 (0.0033)  weight_decay: 0.0100 (0.0100)  time: 0.2105
+Epoch: [8] Total time: 0:00:09 (0.4616 s / it)
+Averaged stats: lr: 0.003133  loss: 0.6106 (0.6154)  class_acc: 0.6562 (0.6815)  min_lr: 0.0033 (0.0033)  weight_decay: 0.0100 (0.0100)
+Test:  [0/4]  eta: 0:00:09  loss: 0.2601 (0.2601)  acc1: 0.9688 (0.9688)  time: 2.4242
+Test:  [3/4]  eta: 0:00:00  loss: 0.4743 (0.8631)  acc1: 0.4062 (0.6800)  time: 0.6174
+Test: Total time: 0:00:02 (0.6370 s / it)
+* Acc@1 69.25% loss 0.6570
+Accuracy of the model on the 398 test images: 69.25%
+Max accuracy: 69.25%
+Epoch: [9]  [ 0/21]  eta: 0:02:12  lr: 0.003114  loss: 0.5268 (0.5268)  class_acc: 0.7812 (0.7812)  min_lr: 0.0031 (0.0031)  weight_decay: 0.0100 (0.0100)  time: 6.3180
+Epoch: [9]  [20/21]  eta: 0:00:00  lr: 0.002727  loss: 0.5890 (0.6091)  class_acc: 0.6875 (0.6786)  min_lr: 0.0029 (0.0029)  weight_decay: 0.0100 (0.0100)  time: 0.1477
+Epoch: [9] Total time: 0:00:09 (0.4473 s / it)
+Averaged stats: lr: 0.002727  loss: 0.5890 (0.6060)  class_acc: 0.6875 (0.6920)  min_lr: 0.0029 (0.0029)  weight_decay: 0.0100 (0.0100)
+Test:  [0/4]  eta: 0:00:09  loss: 0.1804 (0.1804)  acc1: 0.9688 (0.9688)  time: 2.3443
+Test:  [3/4]  eta: 0:00:00  loss: 0.4921 (1.0032)  acc1: 0.3125 (0.6600)  time: 0.5971
+Test: Total time: 0:00:02 (0.6101 s / it)
+* Acc@1 64.75% loss 0.7572
+Accuracy of the model on the 398 test images: 64.75%
+Max accuracy: 69.25%
+Epoch: [10]  [ 0/21]  eta: 0:01:42  lr: 0.002707  loss: 0.5985 (0.5985)  class_acc: 0.6875 (0.6875)  min_lr: 0.0027 (0.0027)  weight_decay: 0.0100 (0.0100)  time: 4.8984
+Epoch: [10]  [20/21]  eta: 0:00:00  lr: 0.002314  loss: 0.6056 (0.6043)  class_acc: 0.7188 (0.6935)  min_lr: 0.0025 (0.0025)  weight_decay: 0.0100 (0.0100)  time: 0.2254
+Epoch: [10] Total time: 0:00:09 (0.4540 s / it)
+Averaged stats: lr: 0.002314  loss: 0.6056 (0.6109)  class_acc: 0.7188 (0.6897)  min_lr: 0.0025 (0.0025)  weight_decay: 0.0100 (0.0100)
+Test:  [0/4]  eta: 0:00:09  loss: 0.2401 (0.2401)  acc1: 0.9688 (0.9688)  time: 2.4510
+Test:  [3/4]  eta: 0:00:00  loss: 0.4907 (0.8759)  acc1: 0.3438 (0.6700)  time: 0.6238
+Test: Total time: 0:00:02 (0.6382 s / it)
+* Acc@1 67.75% loss 0.6798
+Accuracy of the model on the 398 test images: 67.75%
+Max accuracy: 69.25%
+Epoch: [11]  [ 0/21]  eta: 0:02:00  lr: 0.002294  loss: 0.5787 (0.5787)  class_acc: 0.7812 (0.7812)  min_lr: 0.0023 (0.0023)  weight_decay: 0.0100 (0.0100)  time: 5.7350
+Epoch: [11]  [20/21]  eta: 0:00:00  lr: 0.001906  loss: 0.6170 (0.6169)  class_acc: 0.6562 (0.6801)  min_lr: 0.0021 (0.0021)  weight_decay: 0.0100 (0.0100)  time: 0.1951
+Epoch: [11] Total time: 0:00:09 (0.4654 s / it)
+Averaged stats: lr: 0.001906  loss: 0.6170 (0.6012)  class_acc: 0.6562 (0.7113)  min_lr: 0.0021 (0.0021)  weight_decay: 0.0100 (0.0100)
+Test:  [0/4]  eta: 0:00:09  loss: 0.1989 (0.1989)  acc1: 0.9688 (0.9688)  time: 2.4443
+Test:  [3/4]  eta: 0:00:00  loss: 0.4725 (0.9352)  acc1: 0.4062 (0.6700)  time: 0.6253
+Test: Total time: 0:00:02 (0.6390 s / it)
+* Acc@1 67.75% loss 0.7175
+Accuracy of the model on the 398 test images: 67.75%
+Max accuracy: 69.25%
+Epoch: [12]  [ 0/21]  eta: 0:02:12  lr: 0.001887  loss: 0.6457 (0.6457)  class_acc: 0.6875 (0.6875)  min_lr: 0.0019 (0.0019)  weight_decay: 0.0100 (0.0100)  time: 6.2987
+Epoch: [12]  [20/21]  eta: 0:00:00  lr: 0.001515  loss: 0.5924 (0.6032)  class_acc: 0.7188 (0.6935)  min_lr: 0.0017 (0.0017)  weight_decay: 0.0100 (0.0100)  time: 0.1324
+Epoch: [12] Total time: 0:00:09 (0.4331 s / it)
+Averaged stats: lr: 0.001515  loss: 0.5924 (0.6028)  class_acc: 0.7188 (0.6946)  min_lr: 0.0017 (0.0017)  weight_decay: 0.0100 (0.0100)
+Test:  [0/4]  eta: 0:00:09  loss: 0.2807 (0.2807)  acc1: 0.9688 (0.9688)  time: 2.3822
+Test:  [3/4]  eta: 0:00:00  loss: 0.4464 (0.8061)  acc1: 0.5000 (0.7500)  time: 0.6065
+Test: Total time: 0:00:02 (0.6195 s / it)
+* Acc@1 75.25% loss 0.6134
+Accuracy of the model on the 398 test images: 75.25%
+Max accuracy: 75.25%
+Epoch: [13]  [ 0/21]  eta: 0:02:00  lr: 0.001496  loss: 0.5200 (0.5200)  class_acc: 0.7812 (0.7812)  min_lr: 0.0015 (0.0015)  weight_decay: 0.0100 (0.0100)  time: 5.7191
+Epoch: [13]  [20/21]  eta: 0:00:00  lr: 0.001150  loss: 0.5918 (0.5886)  class_acc: 0.6875 (0.6979)  min_lr: 0.0013 (0.0013)  weight_decay: 0.0100 (0.0100)  time: 0.1758
+Epoch: [13] Total time: 0:00:09 (0.4454 s / it)
+Averaged stats: lr: 0.001150  loss: 0.5918 (0.5875)  class_acc: 0.6875 (0.7102)  min_lr: 0.0013 (0.0013)  weight_decay: 0.0100 (0.0100)
+Test:  [0/4]  eta: 0:00:09  loss: 0.2282 (0.2282)  acc1: 0.9688 (0.9688)  time: 2.3684
+Test:  [3/4]  eta: 0:00:00  loss: 0.4597 (0.9066)  acc1: 0.3750 (0.6800)  time: 0.6028
+Test: Total time: 0:00:02 (0.6210 s / it)
+* Acc@1 68.25% loss 0.6814
+Accuracy of the model on the 398 test images: 68.25%
+Max accuracy: 75.25%
+Epoch: [14]  [ 0/21]  eta: 0:02:12  lr: 0.001133  loss: 0.6387 (0.6387)  class_acc: 0.6562 (0.6562)  min_lr: 0.0011 (0.0011)  weight_decay: 0.0100 (0.0100)  time: 6.3107
+Epoch: [14]  [20/21]  eta: 0:00:00  lr: 0.000822  loss: 0.6007 (0.5991)  class_acc: 0.6875 (0.6875)  min_lr: 0.0010 (0.0010)  weight_decay: 0.0100 (0.0100)  time: 0.1515
+Epoch: [14] Total time: 0:00:09 (0.4508 s / it)
+Averaged stats: lr: 0.000822  loss: 0.6007 (0.5937)  class_acc: 0.6875 (0.6957)  min_lr: 0.0010 (0.0010)  weight_decay: 0.0100 (0.0100)
+Test:  [0/4]  eta: 0:00:09  loss: 0.3125 (0.3125)  acc1: 0.8750 (0.8750)  time: 2.2719
+Test:  [3/4]  eta: 0:00:00  loss: 0.4261 (0.7929)  acc1: 0.6562 (0.7700)  time: 0.5792
+Test: Total time: 0:00:02 (0.5959 s / it)
+* Acc@1 77.75% loss 0.5704
+Accuracy of the model on the 398 test images: 77.75%
+Max accuracy: 77.75%
+Epoch: [15]  [ 0/21]  eta: 0:02:17  lr: 0.000808  loss: 0.5278 (0.5278)  class_acc: 0.7188 (0.7188)  min_lr: 0.0008 (0.0008)  weight_decay: 0.0100 (0.0100)  time: 6.5273
+Epoch: [15]  [20/21]  eta: 0:00:00  lr: 0.000540  loss: 0.5782 (0.5824)  class_acc: 0.7188 (0.7188)  min_lr: 0.0007 (0.0007)  weight_decay: 0.0100 (0.0100)  time: 0.1313
+Epoch: [15] Total time: 0:00:09 (0.4429 s / it)
+Averaged stats: lr: 0.000540  loss: 0.5782 (0.5865)  class_acc: 0.7188 (0.7221)  min_lr: 0.0007 (0.0007)  weight_decay: 0.0100 (0.0100)
+Test:  [0/4]  eta: 0:00:09  loss: 0.2196 (0.2196)  acc1: 1.0000 (1.0000)  time: 2.2505
+Test:  [3/4]  eta: 0:00:00  loss: 0.4823 (0.9107)  acc1: 0.3125 (0.6700)  time: 0.5742
+Test: Total time: 0:00:02 (0.5910 s / it)
+* Acc@1 66.50% loss 0.6929
+Accuracy of the model on the 398 test images: 66.50%
+Max accuracy: 77.75%
+Epoch: [16]  [ 0/21]  eta: 0:02:20  lr: 0.000528  loss: 0.6704 (0.6704)  class_acc: 0.6250 (0.6250)  min_lr: 0.0005 (0.0005)  weight_decay: 0.0100 (0.0100)  time: 6.6922
+Epoch: [16]  [20/21]  eta: 0:00:00  lr: 0.000312  loss: 0.5635 (0.5789)  class_acc: 0.7188 (0.7188)  min_lr: 0.0004 (0.0004)  weight_decay: 0.0100 (0.0100)  time: 0.1447
+Epoch: [16] Total time: 0:00:09 (0.4631 s / it)
+Averaged stats: lr: 0.000312  loss: 0.5635 (0.5808)  class_acc: 0.7188 (0.7251)  min_lr: 0.0004 (0.0004)  weight_decay: 0.0100 (0.0100)
+Test:  [0/4]  eta: 0:00:09  loss: 0.2238 (0.2238)  acc1: 0.9688 (0.9688)  time: 2.3681
+Test:  [3/4]  eta: 0:00:00  loss: 0.4218 (0.8417)  acc1: 0.4375 (0.7100)  time: 0.6034
+Test: Total time: 0:00:02 (0.6161 s / it)
+* Acc@1 74.75% loss 0.6220
+Accuracy of the model on the 398 test images: 74.75%
+Max accuracy: 77.75%
+Epoch: [17]  [ 0/21]  eta: 0:02:08  lr: 0.000302  loss: 0.5858 (0.5858)  class_acc: 0.6875 (0.6875)  min_lr: 0.0003 (0.0003)  weight_decay: 0.0100 (0.0100)  time: 6.1409
+Epoch: [17]  [20/21]  eta: 0:00:00  lr: 0.000143  loss: 0.5788 (0.5902)  class_acc: 0.6875 (0.6890)  min_lr: 0.0002 (0.0002)  weight_decay: 0.0100 (0.0100)  time: 0.1915
+Epoch: [17] Total time: 0:00:10 (0.4812 s / it)
+Averaged stats: lr: 0.000143  loss: 0.5788 (0.5927)  class_acc: 0.6875 (0.7005)  min_lr: 0.0002 (0.0002)  weight_decay: 0.0100 (0.0100)
+Test:  [0/4]  eta: 0:00:09  loss: 0.2681 (0.2681)  acc1: 0.9688 (0.9688)  time: 2.4407
+Test:  [3/4]  eta: 0:00:00  loss: 0.4202 (0.8038)  acc1: 0.5312 (0.7500)  time: 0.6215
+Test: Total time: 0:00:02 (0.6348 s / it)
+* Acc@1 76.75% loss 0.5843
+Accuracy of the model on the 398 test images: 76.75%
+Max accuracy: 77.75%
+Epoch: [18]  [ 0/21]  eta: 0:02:14  lr: 0.000136  loss: 0.5196 (0.5196)  class_acc: 0.7812 (0.7812)  min_lr: 0.0001 (0.0001)  weight_decay: 0.0100 (0.0100)  time: 6.4247
+Epoch: [18]  [20/21]  eta: 0:00:00  lr: 0.000038  loss: 0.5582 (0.5664)  class_acc: 0.7500 (0.7604)  min_lr: 0.0001 (0.0001)  weight_decay: 0.0100 (0.0100)  time: 0.1387
+Epoch: [18] Total time: 0:00:09 (0.4446 s / it)
+Averaged stats: lr: 0.000038  loss: 0.5582 (0.5817)  class_acc: 0.7500 (0.7258)  min_lr: 0.0001 (0.0001)  weight_decay: 0.0100 (0.0100)
+Test:  [0/4]  eta: 0:00:09  loss: 0.2485 (0.2485)  acc1: 0.9688 (0.9688)  time: 2.4382
+Test:  [3/4]  eta: 0:00:00  loss: 0.4333 (0.8203)  acc1: 0.4688 (0.7100)  time: 0.6216
+Test: Total time: 0:00:02 (0.6363 s / it)
+* Acc@1 74.50% loss 0.6107
+Accuracy of the model on the 398 test images: 74.50%
+Max accuracy: 77.75%
+Epoch: [19]  [ 0/21]  eta: 0:02:00  lr: 0.000035  loss: 0.6642 (0.6642)  class_acc: 0.6562 (0.6562)  min_lr: 0.0000 (0.0000)  weight_decay: 0.0100 (0.0100)  time: 5.7316
+Epoch: [19]  [20/21]  eta: 0:00:00  lr: 0.000001  loss: 0.5953 (0.5961)  class_acc: 0.6875 (0.6935)  min_lr: 0.0000 (0.0000)  weight_decay: 0.0100 (0.0100)  time: 0.1644
+Epoch: [19] Total time: 0:00:09 (0.4356 s / it)
+Averaged stats: lr: 0.000001  loss: 0.5953 (0.5815)  class_acc: 0.6875 (0.7206)  min_lr: 0.0000 (0.0000)  weight_decay: 0.0100 (0.0100)
+Test:  [0/4]  eta: 0:00:09  loss: 0.2478 (0.2478)  acc1: 0.9688 (0.9688)  time: 2.2601
+Test:  [3/4]  eta: 0:00:00  loss: 0.4280 (0.8151)  acc1: 0.5000 (0.7200)  time: 0.5777
+Test: Total time: 0:00:02 (0.5921 s / it)
+* Acc@1 75.25% loss 0.6038
+Accuracy of the model on the 398 test images: 75.25%
+Max accuracy: 77.75%
+Training time 0:04:12

@@ -7,3 +7,4 @@ pytorch_wavelets
 tensorboardX
 scipy
 scikit-learn
+wandb

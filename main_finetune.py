@@ -25,6 +25,11 @@ import utils
 from utils import NativeScalerWithGradNormCount as NativeScaler
 from utils import str2bool, remap_checkpoint_keys
 
+try:
+    import wandb
+except ImportError:  # pragma: no cover - optional dependency
+    wandb = None
+
 
 def get_args_parser():
 
@@ -154,6 +159,24 @@ def get_args_parser():
     # Evaluation parameters
     parser.add_argument('--crop_pct', type=float, default=None)
 
+    # Weights & Biases logging
+    parser.add_argument('--use_wandb', type=str2bool, default=False,
+                        help='Enable Weights & Biases logging (default: False). Only runs on main process.')
+    parser.add_argument('--wandb_project', type=str, default='SAFE',
+                        help='WandB project name (default: SAFE).')
+    parser.add_argument('--wandb_entity', type=str, default=None,
+                        help='Optional WandB entity/team name.')
+    parser.add_argument('--wandb_group', type=str, default=None,
+                        help='Optional WandB group for multi-run aggregation.')
+    parser.add_argument('--wandb_run_name', type=str, default=None,
+                        help='Custom WandB run name, defaults to `<model>-<timestamp>`.')
+    parser.add_argument('--wandb_tags', type=str, default=None,
+                        help='Comma-separated list of WandB tags.')
+    parser.add_argument('--wandb_notes', type=str, default=None,
+                        help='Free-form notes that appear in WandB UI.')
+    parser.add_argument('--wandb_mode', type=str, default='online', choices=['online', 'offline', 'disabled'],
+                        help='WandB mode for logging (default: online).')
+
     # Distributed training parameters
     parser.add_argument('--world_size', default=1, type=int,
                         help='number of distributed processes')
@@ -192,6 +215,43 @@ def main(args):
 
     utils.init_distributed_mode(args)
     print(args)
+
+    main_process = utils.is_main_process()
+    wandb_run = None
+    wandb_enabled = bool(args.use_wandb)
+
+    if isinstance(args.wandb_tags, str):
+        wandb_tags = [tag.strip() for tag in args.wandb_tags.split(',') if tag.strip()]
+    elif isinstance(args.wandb_tags, (list, tuple)):
+        wandb_tags = list(args.wandb_tags)
+    else:
+        wandb_tags = None
+
+    if wandb_enabled and wandb is None:
+        raise ImportError(
+            "Weights & Biases is not installed. Please `pip install wandb` or run with --use_wandb False.")
+
+    if wandb_enabled and not main_process:
+        # Prevent non-main processes from spawning duplicate runs
+        wandb_enabled = False
+
+    if wandb_enabled:
+        default_run_name = args.wandb_run_name or f"{args.model}-{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}"
+        wandb_run = wandb.init(
+            project=args.wandb_project,
+            entity=args.wandb_entity,
+            group=args.wandb_group,
+            name=default_run_name,
+            notes=args.wandb_notes,
+            tags=wandb_tags,
+            mode=args.wandb_mode,
+            dir=args.output_dir if args.output_dir else None,
+            config=vars(args)
+        )
+
+    def log_to_wandb(metrics, step=None, commit=True):
+        if wandb_run is not None and metrics:
+            wandb.log(metrics, step=step, commit=commit)
 
     # Fix the Seed for Reproducibility
     if args.seed is not None:
@@ -384,6 +444,16 @@ def main(args):
     
             rows.append([val, acc * 100, ap * 100])
 
+            if wandb_run is not None:
+                eval_metrics = {
+                    f'eval/{val}/loss': test_stats['loss'],
+                    f'eval/{val}/acc1': test_stats['acc1'],
+                    f'eval/{val}/accuracy_binary': acc,
+                    f'eval/{val}/average_precision': ap,
+                }
+                eval_metrics.update({'eval/dataset_index': v_id})
+                log_to_wandb(eval_metrics, step=v_id)
+
         def calculate_column_means(rows):
             if not rows or len(rows[0]) < 2:
                 raise ValueError("The input rows list is empty or lacks numeric columns.")
@@ -398,6 +468,8 @@ def main(args):
         with open(csv_name, 'w') as f:
             csv_writer = csv.writer(f, delimiter=',')
             csv_writer.writerows(rows)
+        if wandb_run is not None:
+            wandb_run.finish()
         return
     
     max_accuracy = 0.0
@@ -417,6 +489,11 @@ def main(args):
             args.clip_grad, model_ema, mixup_fn,
             log_writer=log_writer, args=args, 
         )
+        if wandb_run is not None:
+            train_metrics = {f"train/{k}": v for k, v in train_stats.items()}
+            train_metrics['epoch'] = epoch
+            train_metrics['train/num_steps_completed'] = (epoch + 1) * len(data_loader_train)
+            log_to_wandb(train_metrics, step=epoch, commit=data_loader_val is None)
         if args.output_dir and args.save_ckpt:
             if (epoch + 1) % args.save_ckpt_freq == 0 or epoch + 1 == args.epochs:
                 utils.save_model(
@@ -441,6 +518,16 @@ def main(args):
                 # log_writer.update(test_acc5=test_stats['acc5'], head="perf", step=epoch)
                 log_writer.update(test_loss=test_stats['loss'], head="perf", step=epoch)
 
+            if wandb_run is not None:
+                val_metrics = {f"val/{k}": v for k, v in test_stats.items()}
+                val_metrics.update({
+                    'epoch': epoch,
+                    'val/accuracy_binary': acc,
+                    'val/average_precision': ap,
+                    'val/best_accuracy': max_accuracy,
+                })
+                log_to_wandb(val_metrics, step=epoch)
+
             log_stats = {**{f'train_{k}': v for k, v in train_stats.items()},
                          **{f'test_{k}': v for k, v in test_stats.items()},
                          'epoch': epoch,
@@ -461,6 +548,11 @@ def main(args):
                 if log_writer is not None:
                     log_writer.update(test_acc1_ema=test_stats_ema['acc1'], head="perf", step=epoch)
                 log_stats.update({**{f'test_{k}_ema': v for k, v in test_stats_ema.items()}})
+
+                if wandb_run is not None:
+                    ema_metrics = {f"val_ema/{k}": v for k, v in test_stats_ema.items()}
+                    ema_metrics.update({'epoch': epoch, 'val_ema/best_accuracy': max_accuracy_ema})
+                    log_to_wandb(ema_metrics, step=epoch)
         else:
             log_stats = {**{f'train_{k}': v for k, v in train_stats.items()},
                         'epoch': epoch,
@@ -475,6 +567,9 @@ def main(args):
     total_time = time.time() - start_time
     total_time_str = str(datetime.timedelta(seconds=int(total_time)))
     print('Training time {}'.format(total_time_str))
+
+    if wandb_run is not None:
+        wandb_run.finish()
 
 
 if __name__ == '__main__':

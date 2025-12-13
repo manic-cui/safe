@@ -1,0 +1,220 @@
+nohup: ignoring input
+--------------------------------------------------------
+Testing with JPEG Quality: None
+--------------------------------------------------------
+Processing /data/mannicui/aigi-detection/CNNDetection/test...
+/data/mannicui/miniconda3/envs/safe/lib/python3.9/site-packages/torch/distributed/launch.py:183: FutureWarning: The module torch.distributed.launch is deprecated
+and will be removed in future. Use torchrun.
+Note that --use-env is set by default in torchrun.
+If your script expects `--local-rank` argument to be set, please
+change it to read from `os.environ['LOCAL_RANK']` instead. See 
+https://pytorch.org/docs/stable/distributed.html#launch-utility for 
+further instructions
+
+  warnings.warn(
+[2025-12-13 11:19:01,942] torch.distributed.run: [WARNING] 
+[2025-12-13 11:19:01,942] torch.distributed.run: [WARNING] *****************************************
+[2025-12-13 11:19:01,942] torch.distributed.run: [WARNING] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+[2025-12-13 11:19:01,942] torch.distributed.run: [WARNING] *****************************************
+| distributed init (rank 0): env://, gpu 0
+| distributed init (rank 1): env://, gpu 1
+| distributed init (rank 2): env://, gpu 2
+| distributed init (rank 3): env://, gpu 3
+Namespace(jpeg_factor=None, blur_sigma=None, mask_ratio=None, mask_patch_size=None, transform_mode='crop', batch_size=256, epochs=100, update_freq=1, model='SAFE', input_size=256, layer_decay_type='single', model_ema=False, model_ema_decay=0.9999, model_ema_force_cpu=False, model_ema_eval=False, clip_grad=None, weight_decay=0.05, lr=None, blr=0.0005, layer_decay=1.0, min_lr=1e-06, warmup_epochs=20, warmup_steps=-1, opt='adamw', opt_eps=1e-08, opt_betas=None, momentum=0.9, weight_decay_end=None, smoothing=0.1, mixup=0.0, cutmix=0.0, cutmix_minmax=None, mixup_prob=1.0, mixup_switch_prob=0.5, mixup_mode='batch', pretrained=True, global_pool=True, head_init_scale=0.001, model_key='model|module', model_prefix='', num_train=10000000000, data_path='', nb_classes=2, output_dir='/home/mannicui/SAFE/results/SAFE/20251212_210956/eval_clean', log_dir=None, device='cuda', seed=None, resume='/home/mannicui/SAFE/results/SAFE/20251212_210956/checkpoint-best.pth', eval_data_path='/data/mannicui/aigi-detection/CNNDetection/test', imagenet_default_mean_and_std=True, data_set='IMNET', auto_resume=True, save_ckpt=True, save_ckpt_freq=5, save_ckpt_num=100, start_epoch=0, eval=True, dist_eval=True, disable_eval=False, num_workers=16, pin_mem=True, crop_pct=None, use_wandb=False, wandb_project='SAFE', wandb_entity=None, wandb_group=None, wandb_run_name=None, wandb_tags=None, wandb_notes=None, wandb_mode='online', world_size=4, local_rank=0, dist_on_itp=False, dist_url='env://', use_amp=False, rank=0, gpu=0, distributed=True, dist_backend='nccl')
+Number of params: 1.44M
+Base lr: 5.00e-04
+Actual lr: 2.00e-03
+Accumulate grad iterations: 1
+Effective batch size: 1024
+criterion = LabelSmoothingCrossEntropy()
+Resume checkpoint /home/mannicui/SAFE/results/SAFE/20251212_210956/checkpoint-best.pth
+With optim & sched!
+Eval only mode
+Warning: Enabling distributed evaluation with an eval dataset not divisible by process number. This will slightly alter validation results as extra duplicate entries are added to achieve equal num of samples per-process.
+/data/mannicui/miniconda3/envs/safe/lib/python3.9/site-packages/pytorch_wavelets/dtcwt/coeffs.py:7: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  from pkg_resources import resource_stream
+/data/mannicui/miniconda3/envs/safe/lib/python3.9/site-packages/pytorch_wavelets/dtcwt/coeffs.py:7: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  from pkg_resources import resource_stream
+/data/mannicui/miniconda3/envs/safe/lib/python3.9/site-packages/pytorch_wavelets/dtcwt/coeffs.py:7: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  from pkg_resources import resource_stream
+/data/mannicui/miniconda3/envs/safe/lib/python3.9/site-packages/pytorch_wavelets/dtcwt/coeffs.py:7: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  from pkg_resources import resource_stream
+Test:  [ 0/89]  eta: 6:20:32  loss: 0.2625 (0.2625)  acc1: 0.8828 (0.8828)  time: 256.5457
+Test:  [88/89]  eta: 0:00:09  loss: 0.0901 (0.5797)  acc1: 0.9883 (0.8166)  time: 5.8621
+Test: Total time: 0:14:42 (9.9179 s / it)
+* Acc@1 81.78% loss 0.5784
+Accuracy of the network on 90329 test images: 81.78%
+test dataset is biggan acc: 81.78%, ap: 69.53%
+***********************************
+Processing /data/mannicui/aigi-detection/Chameleon/test...
+/data/mannicui/miniconda3/envs/safe/lib/python3.9/site-packages/torch/distributed/launch.py:183: FutureWarning: The module torch.distributed.launch is deprecated
+and will be removed in future. Use torchrun.
+Note that --use-env is set by default in torchrun.
+If your script expects `--local-rank` argument to be set, please
+change it to read from `os.environ['LOCAL_RANK']` instead. See 
+https://pytorch.org/docs/stable/distributed.html#launch-utility for 
+further instructions
+
+  warnings.warn(
+[2025-12-13 11:34:17,310] torch.distributed.run: [WARNING] 
+[2025-12-13 11:34:17,310] torch.distributed.run: [WARNING] *****************************************
+[2025-12-13 11:34:17,310] torch.distributed.run: [WARNING] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+[2025-12-13 11:34:17,310] torch.distributed.run: [WARNING] *****************************************
+| distributed init (rank 0): env://, gpu 0
+| distributed init (rank 2): env://, gpu 2
+| distributed init (rank 1): env://, gpu 1
+| distributed init (rank 3): env://, gpu 3
+Namespace(jpeg_factor=None, blur_sigma=None, mask_ratio=None, mask_patch_size=None, transform_mode='crop', batch_size=256, epochs=100, update_freq=1, model='SAFE', input_size=256, layer_decay_type='single', model_ema=False, model_ema_decay=0.9999, model_ema_force_cpu=False, model_ema_eval=False, clip_grad=None, weight_decay=0.05, lr=None, blr=0.0005, layer_decay=1.0, min_lr=1e-06, warmup_epochs=20, warmup_steps=-1, opt='adamw', opt_eps=1e-08, opt_betas=None, momentum=0.9, weight_decay_end=None, smoothing=0.1, mixup=0.0, cutmix=0.0, cutmix_minmax=None, mixup_prob=1.0, mixup_switch_prob=0.5, mixup_mode='batch', pretrained=True, global_pool=True, head_init_scale=0.001, model_key='model|module', model_prefix='', num_train=10000000000, data_path='', nb_classes=2, output_dir='/home/mannicui/SAFE/results/SAFE/20251212_210956/eval_clean', log_dir=None, device='cuda', seed=None, resume='/home/mannicui/SAFE/results/SAFE/20251212_210956/checkpoint-best.pth', eval_data_path='/data/mannicui/aigi-detection/Chameleon/test', imagenet_default_mean_and_std=True, data_set='IMNET', auto_resume=True, save_ckpt=True, save_ckpt_freq=5, save_ckpt_num=100, start_epoch=0, eval=True, dist_eval=True, disable_eval=False, num_workers=16, pin_mem=True, crop_pct=None, use_wandb=False, wandb_project='SAFE', wandb_entity=None, wandb_group=None, wandb_run_name=None, wandb_tags=None, wandb_notes=None, wandb_mode='online', world_size=4, local_rank=0, dist_on_itp=False, dist_url='env://', use_amp=False, rank=0, gpu=0, distributed=True, dist_backend='nccl')
+Number of params: 1.44M
+Base lr: 5.00e-04
+Actual lr: 2.00e-03
+Accumulate grad iterations: 1
+Effective batch size: 1024
+criterion = LabelSmoothingCrossEntropy()
+Resume checkpoint /home/mannicui/SAFE/results/SAFE/20251212_210956/checkpoint-best.pth
+With optim & sched!
+Eval only mode
+Traceback (most recent call last):
+  File "/home/mannicui/SAFE/main_finetune.py", line 581, in <module>
+    main(args)
+  File "/home/mannicui/SAFE/main_finetune.py", line 439, in main
+    test_stats, acc, ap = evaluate(data_loader_val, model, device, val)
+  File "/data/mannicui/miniconda3/envs/safe/lib/python3.9/site-packages/torch/utils/_contextlib.py", line 115, in decorate_context
+    return func(*args, **kwargs)
+  File "/home/mannicui/SAFE/engine_finetune.py", line 136, in evaluate
+    for index, batch in enumerate(metric_logger.log_every(data_loader, 1000, header)):
+  File "/home/mannicui/SAFE/utils.py", line 185, in log_every
+    header, total_time_str, total_time / len(iterable)))
+ZeroDivisionError: float division by zero
+Traceback (most recent call last):
+  File "/home/mannicui/SAFE/main_finetune.py", line 581, in <module>
+    main(args)
+  File "/home/mannicui/SAFE/main_finetune.py", line 439, in main
+    test_stats, acc, ap = evaluate(data_loader_val, model, device, val)
+  File "/data/mannicui/miniconda3/envs/safe/lib/python3.9/site-packages/torch/utils/_contextlib.py", line 115, in decorate_context
+    return func(*args, **kwargs)
+  File "/home/mannicui/SAFE/engine_finetune.py", line 136, in evaluate
+    for index, batch in enumerate(metric_logger.log_every(data_loader, 1000, header)):
+  File "/home/mannicui/SAFE/utils.py", line 185, in log_every
+    header, total_time_str, total_time / len(iterable)))
+ZeroDivisionError: float division by zero
+Traceback (most recent call last):
+  File "/home/mannicui/SAFE/main_finetune.py", line 581, in <module>
+    main(args)
+  File "/home/mannicui/SAFE/main_finetune.py", line 439, in main
+    test_stats, acc, ap = evaluate(data_loader_val, model, device, val)
+  File "/data/mannicui/miniconda3/envs/safe/lib/python3.9/site-packages/torch/utils/_contextlib.py", line 115, in decorate_context
+    return func(*args, **kwargs)
+  File "/home/mannicui/SAFE/engine_finetune.py", line 136, in evaluate
+    for index, batch in enumerate(metric_logger.log_every(data_loader, 1000, header)):
+  File "/home/mannicui/SAFE/utils.py", line 185, in log_every
+    header, total_time_str, total_time / len(iterable)))
+ZeroDivisionError: float division by zero
+Traceback (most recent call last):
+  File "/home/mannicui/SAFE/main_finetune.py", line 581, in <module>
+    main(args)
+  File "/home/mannicui/SAFE/main_finetune.py", line 439, in main
+    test_stats, acc, ap = evaluate(data_loader_val, model, device, val)
+  File "/data/mannicui/miniconda3/envs/safe/lib/python3.9/site-packages/torch/utils/_contextlib.py", line 115, in decorate_context
+    return func(*args, **kwargs)
+  File "/home/mannicui/SAFE/engine_finetune.py", line 136, in evaluate
+    for index, batch in enumerate(metric_logger.log_every(data_loader, 1000, header)):
+  File "/home/mannicui/SAFE/utils.py", line 185, in log_every
+    header, total_time_str, total_time / len(iterable)))
+ZeroDivisionError: float division by zero
+[2025-12-13 11:34:37,388] torch.distributed.elastic.multiprocessing.api: [ERROR] failed (exitcode: 1) local_rank: 0 (pid: 1939358) of binary: /data/mannicui/miniconda3/envs/safe/bin/python
+Traceback (most recent call last):
+  File "/data/mannicui/miniconda3/envs/safe/lib/python3.9/runpy.py", line 197, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/data/mannicui/miniconda3/envs/safe/lib/python3.9/runpy.py", line 87, in _run_code
+    exec(code, run_globals)
+  File "/data/mannicui/miniconda3/envs/safe/lib/python3.9/site-packages/torch/distributed/launch.py", line 198, in <module>
+    main()
+  File "/data/mannicui/miniconda3/envs/safe/lib/python3.9/site-packages/torch/distributed/launch.py", line 194, in main
+    launch(args)
+  File "/data/mannicui/miniconda3/envs/safe/lib/python3.9/site-packages/torch/distributed/launch.py", line 179, in launch
+    run(args)
+  File "/data/mannicui/miniconda3/envs/safe/lib/python3.9/site-packages/torch/distributed/run.py", line 803, in run
+    elastic_launch(
+  File "/data/mannicui/miniconda3/envs/safe/lib/python3.9/site-packages/torch/distributed/launcher/api.py", line 135, in __call__
+    return launch_agent(self._config, self._entrypoint, list(args))
+  File "/data/mannicui/miniconda3/envs/safe/lib/python3.9/site-packages/torch/distributed/launcher/api.py", line 268, in launch_agent
+    raise ChildFailedError(
+torch.distributed.elastic.multiprocessing.errors.ChildFailedError: 
+============================================================
+main_finetune.py FAILED
+------------------------------------------------------------
+Failures:
+[1]:
+  time      : 2025-12-13_11:34:37
+  host      : hustvl-2030
+  rank      : 1 (local_rank: 1)
+  exitcode  : 1 (pid: 1939367)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+[2]:
+  time      : 2025-12-13_11:34:37
+  host      : hustvl-2030
+  rank      : 2 (local_rank: 2)
+  exitcode  : 1 (pid: 1939368)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+[3]:
+  time      : 2025-12-13_11:34:37
+  host      : hustvl-2030
+  rank      : 3 (local_rank: 3)
+  exitcode  : 1 (pid: 1939369)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+------------------------------------------------------------
+Root Cause (first observed failure):
+[0]:
+  time      : 2025-12-13_11:34:37
+  host      : hustvl-2030
+  rank      : 0 (local_rank: 0)
+  exitcode  : 1 (pid: 1939358)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+============================================================
+Processing /data/mannicui/aigi-detection/WildRF/test...
+/data/mannicui/miniconda3/envs/safe/lib/python3.9/site-packages/torch/distributed/launch.py:183: FutureWarning: The module torch.distributed.launch is deprecated
+and will be removed in future. Use torchrun.
+Note that --use-env is set by default in torchrun.
+If your script expects `--local-rank` argument to be set, please
+change it to read from `os.environ['LOCAL_RANK']` instead. See 
+https://pytorch.org/docs/stable/distributed.html#launch-utility for 
+further instructions
+
+  warnings.warn(
+[2025-12-13 11:34:39,998] torch.distributed.run: [WARNING] 
+[2025-12-13 11:34:39,998] torch.distributed.run: [WARNING] *****************************************
+[2025-12-13 11:34:39,998] torch.distributed.run: [WARNING] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+[2025-12-13 11:34:39,998] torch.distributed.run: [WARNING] *****************************************
+| distributed init (rank 1): env://, gpu 1
+| distributed init (rank 2): env://, gpu 2
+| distributed init (rank 0): env://, gpu 0
+| distributed init (rank 3): env://, gpu 3
+Namespace(jpeg_factor=None, blur_sigma=None, mask_ratio=None, mask_patch_size=None, transform_mode='crop', batch_size=256, epochs=100, update_freq=1, model='SAFE', input_size=256, layer_decay_type='single', model_ema=False, model_ema_decay=0.9999, model_ema_force_cpu=False, model_ema_eval=False, clip_grad=None, weight_decay=0.05, lr=None, blr=0.0005, layer_decay=1.0, min_lr=1e-06, warmup_epochs=20, warmup_steps=-1, opt='adamw', opt_eps=1e-08, opt_betas=None, momentum=0.9, weight_decay_end=None, smoothing=0.1, mixup=0.0, cutmix=0.0, cutmix_minmax=None, mixup_prob=1.0, mixup_switch_prob=0.5, mixup_mode='batch', pretrained=True, global_pool=True, head_init_scale=0.001, model_key='model|module', model_prefix='', num_train=10000000000, data_path='', nb_classes=2, output_dir='/home/mannicui/SAFE/results/SAFE/20251212_210956/eval_clean', log_dir=None, device='cuda', seed=None, resume='/home/mannicui/SAFE/results/SAFE/20251212_210956/checkpoint-best.pth', eval_data_path='/data/mannicui/aigi-detection/WildRF/test', imagenet_default_mean_and_std=True, data_set='IMNET', auto_resume=True, save_ckpt=True, save_ckpt_freq=5, save_ckpt_num=100, start_epoch=0, eval=True, dist_eval=True, disable_eval=False, num_workers=16, pin_mem=True, crop_pct=None, use_wandb=False, wandb_project='SAFE', wandb_entity=None, wandb_group=None, wandb_run_name=None, wandb_tags=None, wandb_notes=None, wandb_mode='online', world_size=4, local_rank=0, dist_on_itp=False, dist_url='env://', use_amp=False, rank=0, gpu=0, distributed=True, dist_backend='nccl')
+Number of params: 1.44M
+Base lr: 5.00e-04
+Actual lr: 2.00e-03
+Accumulate grad iterations: 1
+Effective batch size: 1024
+criterion = LabelSmoothingCrossEntropy()
+Resume checkpoint /home/mannicui/SAFE/results/SAFE/20251212_210956/checkpoint-best.pth
+With optim & sched!
+Eval only mode
+/data/mannicui/miniconda3/envs/safe/lib/python3.9/site-packages/pytorch_wavelets/dtcwt/coeffs.py:7: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  from pkg_resources import resource_stream
+/data/mannicui/miniconda3/envs/safe/lib/python3.9/site-packages/pytorch_wavelets/dtcwt/coeffs.py:7: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  from pkg_resources import resource_stream
+/data/mannicui/miniconda3/envs/safe/lib/python3.9/site-packages/pytorch_wavelets/dtcwt/coeffs.py:7: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  from pkg_resources import resource_stream
+/data/mannicui/miniconda3/envs/safe/lib/python3.9/site-packages/pytorch_wavelets/dtcwt/coeffs.py:7: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  from pkg_resources import resource_stream
+Test:  [0/1]  eta: 0:00:05  loss: 1.5204 (1.5204)  acc1: 0.5000 (0.5000)  time: 5.3856
+Test: Total time: 0:00:05 (5.4834 s / it)
+* Acc@1 50.31% loss 1.5250
+Accuracy of the network on 320 test images: 50.31%
+test dataset is facebook acc: 50.31%, ap: 54.78%
+***********************************

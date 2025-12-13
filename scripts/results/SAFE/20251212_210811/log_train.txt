@@ -1,0 +1,71 @@
+/data/mannicui/miniconda3/envs/safe/lib/python3.9/site-packages/torch/distributed/launch.py:183: FutureWarning: The module torch.distributed.launch is deprecated
+and will be removed in future. Use torchrun.
+Note that --use-env is set by default in torchrun.
+If your script expects `--local-rank` argument to be set, please
+change it to read from `os.environ['LOCAL_RANK']` instead. See 
+https://pytorch.org/docs/stable/distributed.html#launch-utility for 
+further instructions
+
+  warnings.warn(
+[2025-12-12 21:08:20,857] torch.distributed.run: [WARNING] 
+[2025-12-12 21:08:20,857] torch.distributed.run: [WARNING] *****************************************
+[2025-12-12 21:08:20,857] torch.distributed.run: [WARNING] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+[2025-12-12 21:08:20,857] torch.distributed.run: [WARNING] *****************************************
+/data/mannicui/miniconda3/envs/safe/bin/python: can't open file '/home/mannicui/SAFE/scripts/main_finetune.py': [Errno 2] No such file or directory
+/data/mannicui/miniconda3/envs/safe/bin/python: can't open file '/home/mannicui/SAFE/scripts/main_finetune.py': [Errno 2] No such file or directory
+/data/mannicui/miniconda3/envs/safe/bin/python: can't open file '/home/mannicui/SAFE/scripts/main_finetune.py': [Errno 2] No such file or directory
+/data/mannicui/miniconda3/envs/safe/bin/python: can't open file '/home/mannicui/SAFE/scripts/main_finetune.py': [Errno 2] No such file or directory
+[2025-12-12 21:08:25,937] torch.distributed.elastic.multiprocessing.api: [ERROR] failed (exitcode: 2) local_rank: 0 (pid: 829267) of binary: /data/mannicui/miniconda3/envs/safe/bin/python
+Traceback (most recent call last):
+  File "/data/mannicui/miniconda3/envs/safe/lib/python3.9/runpy.py", line 197, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/data/mannicui/miniconda3/envs/safe/lib/python3.9/runpy.py", line 87, in _run_code
+    exec(code, run_globals)
+  File "/data/mannicui/miniconda3/envs/safe/lib/python3.9/site-packages/torch/distributed/launch.py", line 198, in <module>
+    main()
+  File "/data/mannicui/miniconda3/envs/safe/lib/python3.9/site-packages/torch/distributed/launch.py", line 194, in main
+    launch(args)
+  File "/data/mannicui/miniconda3/envs/safe/lib/python3.9/site-packages/torch/distributed/launch.py", line 179, in launch
+    run(args)
+  File "/data/mannicui/miniconda3/envs/safe/lib/python3.9/site-packages/torch/distributed/run.py", line 803, in run
+    elastic_launch(
+  File "/data/mannicui/miniconda3/envs/safe/lib/python3.9/site-packages/torch/distributed/launcher/api.py", line 135, in __call__
+    return launch_agent(self._config, self._entrypoint, list(args))
+  File "/data/mannicui/miniconda3/envs/safe/lib/python3.9/site-packages/torch/distributed/launcher/api.py", line 268, in launch_agent
+    raise ChildFailedError(
+torch.distributed.elastic.multiprocessing.errors.ChildFailedError: 
+============================================================
+main_finetune.py FAILED
+------------------------------------------------------------
+Failures:
+[1]:
+  time      : 2025-12-12_21:08:25
+  host      : hustvl-2030
+  rank      : 1 (local_rank: 1)
+  exitcode  : 2 (pid: 829268)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+[2]:
+  time      : 2025-12-12_21:08:25
+  host      : hustvl-2030
+  rank      : 2 (local_rank: 2)
+  exitcode  : 2 (pid: 829269)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+[3]:
+  time      : 2025-12-12_21:08:25
+  host      : hustvl-2030
+  rank      : 3 (local_rank: 3)
+  exitcode  : 2 (pid: 829270)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+------------------------------------------------------------
+Root Cause (first observed failure):
+[0]:
+  time      : 2025-12-12_21:08:25
+  host      : hustvl-2030
+  rank      : 0 (local_rank: 0)
+  exitcode  : 2 (pid: 829267)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+============================================================
