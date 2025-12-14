@@ -1,0 +1,6 @@
+/home/mannicui/SAFE/results/SAFE/20251212_210956/checkpoint-best.pth model testing on...
+testset,accuracy,avg precision
+facebook,50.0,52.068759572159216
+reddit,50.73333333333333,51.10829856479368
+twitter,35.613207547169814,67.05894078966206
+mean,45.448846960167714,56.745332975538325

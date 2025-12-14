@@ -97,6 +97,35 @@ class RandomMask(object):
             mask[top:top+self.patch_size, left:left+self.patch_size] = 0
 
         return tensor * mask.expand_as(tensor)
+class UpDownSampling():
+    def __init__(self, scale_factor=0.5, p=1.0):
+        self.scale_factor = scale_factor
+        self.p = p
+
+    def __call__(self, img):
+        if random.random() < self.p:
+            w, h = img.size
+            new_w = int(w * self.scale_factor)
+            new_h = int(h * self.scale_factor)
+            # 论文中指明 Down-sampling 使用 Nearest Neighbor
+            img = img.resize((new_w, new_h), resample=Image.NEAREST)
+            # Up-sampling 回复原状，通常也保持 Nearest 以保留像素化特征，或者使用 Bilinear
+            img = img.resize((w, h), resample=Image.NEAREST)
+        return img
+
+# 【新增类 2】加性高斯噪声 (Additive Gaussian Noise)
+# 论文设定 sigma=4 (针对0-255像素值)，这里针对 Tensor (0-1) 进行归一化处理
+class RandomGaussianNoise(object):
+    def __init__(self, mean=0.0, sigma=4.0, p=1.0):
+        self.mean = mean
+        self.sigma = sigma / 255.0  # 将 0-255 的 sigma 映射到 0-1
+        self.p = p
+
+    def __call__(self, tensor):
+        if random.random() < self.p:
+            noise = torch.randn_like(tensor) * self.sigma + self.mean
+            return torch.clamp(tensor + noise, 0.0, 1.0)
+        return tensor
 
 
 def Get_Transforms(args):

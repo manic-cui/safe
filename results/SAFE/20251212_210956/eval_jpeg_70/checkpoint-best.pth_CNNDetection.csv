@@ -1,0 +1,4 @@
+/home/mannicui/SAFE/results/SAFE/20251212_210956/checkpoint-best.pth model testing on...
+testset,accuracy,avg precision
+biggan,50.02214054819998,59.50301198521829
+mean,50.02214054819998,59.50301198521829
